@@ -174,7 +174,7 @@ resource "aws_instance" "server_1" {
               yum install nginx -y
               systemctl start nginx
               systemctl enable nginx
-              echo "<h1> $(hostname) </h1>" > /var/www/html/index.html
+              echo "<h1> $(hostname) </h1>" > /usr/share/nginx/html/index.html
               EOF
   tags = {
     Name = "server-1"
@@ -194,7 +194,7 @@ resource "aws_instance" "public_instance_b" {
               yum install nginx -y
               systemctl start nginx
               systemctl enable nginx
-              echo "<h1> $(hostname) </h1>" > /var/www/html/index.html
+              echo "<h1> $(hostname) </h1>" > /usr/share/nginx/html/index.html
               EOF
   tags = {
     Name = "server-2"
