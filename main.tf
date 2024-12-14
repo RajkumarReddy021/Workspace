@@ -169,11 +169,12 @@ resource "aws_instance" "server_1" {
   associate_public_ip_address = true
   user_data = <<-EOF
               #!/bin/bash
-              apt update -y
-              apt install -y nginx
+              apt-get update -y
+              apt-get install nginx -y
               systemctl start nginx
               systemctl enable nginx
               echo "<h1> $(hostname) </h1>" > /var/www/html/index.html
+              systemctl status nginx >> /var/log/nginx_status.log
               EOF
   tags = {
     Name = "server-1"
@@ -189,10 +190,12 @@ resource "aws_instance" "public_instance_b" {
   associate_public_ip_address = true
   user_data = <<-EOF
               #!/bin/bash
-              apt update -y
-              apt install -y nginx
+              apt-get update -y
+              apt-get install nginx -y
               systemctl start nginx
               systemctl enable nginx
+              echo "<h1> $(hostname) </h1>" > /var/www/html/index.html
+              systemctl status nginx >> /var/log/nginx_status.log
               EOF
   tags = {
     Name = "server-2"
